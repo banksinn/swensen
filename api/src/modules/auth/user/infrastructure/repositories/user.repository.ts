@@ -15,4 +15,13 @@ export class UserRepository
   ) {
     super(userRepository);
   }
+
+  async findOneWithPassword(email: string): Promise<User> {
+    const user = await this.userRepository
+      .createQueryBuilder('user')
+      .addSelect('user.password')
+      .where('user.email = :email', { email })
+      .getOne();
+    return user;
+  }
 }

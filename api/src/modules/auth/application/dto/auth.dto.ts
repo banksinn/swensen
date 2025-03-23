@@ -1,4 +1,9 @@
 import { CreateUserDto } from '@/modules/auth/user/application/dto/user.dto';
-import { PickType } from '@nestjs/swagger';
+import { PartialType, PickType } from '@nestjs/swagger';
 
-export class LoginUserDto extends PickType(CreateUserDto, ['email']) {}
+export class ValidateUserDto extends PickType(CreateUserDto, [
+  'email',
+  'password',
+]) {}
+
+export class RegisterDto extends PartialType(CreateUserDto) {}

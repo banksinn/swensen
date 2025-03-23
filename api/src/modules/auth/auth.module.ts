@@ -9,6 +9,8 @@ import { UserService } from '@/modules/auth/user/domain/services/user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '@/modules/auth/user/domain/entities/user.entity';
 import { UserRepository } from '@/modules/auth/user/infrastructure/repositories/user.repository';
+import { UserController } from '@/modules/auth/user/presentation/user.controller';
+import { LocalStrategy } from '@/modules/auth/domain/authentication/strategies/local.strategy';
 
 @Module({
   imports: [
@@ -20,7 +22,13 @@ import { UserRepository } from '@/modules/auth/user/infrastructure/repositories/
       }),
     }),
   ],
-  providers: [UserRepository, UserService, AuthService, JwtStrategy],
-  controllers: [AuthController],
+  providers: [
+    UserRepository,
+    UserService,
+    AuthService,
+    LocalStrategy,
+    JwtStrategy,
+  ],
+  controllers: [AuthController, UserController],
 })
 export class AuthModule {}

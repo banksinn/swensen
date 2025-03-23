@@ -1,15 +1,14 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
+import { Inter } from 'next/font/google';
+import '@/app/globals.scss';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const inter = Inter({
+  variable: '--font-inter',
   subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -19,17 +18,21 @@ export const metadata: Metadata = {
     'สั่งเลย! พร้อมส่งไอศกรีมถึงที่! ผ่าน https://www.swensens1112.com ดาวน์โหลดแอปฯ หรือโทรสั่ง 1112 ถึงบ้านทันที',
 };
 
-export default function RootLayout({
+export default async function LocalLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }>) {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html>
+      <body className={inter.variable} lang={locale}>
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>
   );

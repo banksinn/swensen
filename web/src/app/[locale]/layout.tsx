@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     'สั่งเลย! พร้อมส่งไอศกรีมถึงที่! ผ่าน https://www.swensens1112.com ดาวน์โหลดแอปฯ หรือโทรสั่ง 1112 ถึงบ้านทันที',
 };
 
-export default async function LocalLayout({
+export default async function LocaleLayout({
   children,
   params,
 }: Readonly<{

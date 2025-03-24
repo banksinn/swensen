@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '@/app/globals.scss';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 
 const inter = Inter({
@@ -27,7 +27,7 @@ export default async function LocaleLayout({
 }>) {
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
-    notFound();
+    redirect('/th');
   }
   return (
     <html>

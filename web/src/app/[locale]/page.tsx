@@ -11,6 +11,7 @@ export default function Home() {
       <h5>{t('title')}</h5>
       <h6>{t('title')}</h6>
       <p style={{ fontSize: 16 }}>{t('title')}</p>
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
     </div>
   );
 }
